@@ -24,8 +24,8 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
         parent::__construct($name, $primaryFieldName, $requestFieldName, $meta, $data);
     }
 
-    public function getData()
-    {
+    public function getData() {
+
         if (isset($this->loadedData)) {
             return $this->loadedData;
         }
@@ -41,7 +41,6 @@ class DataProvider extends \Magento\Ui\DataProvider\AbstractDataProvider
             //$post->getPostId : PostId declared in 'postform.xml'
             
         }
-
 
         return $this->loadedData;
 

@@ -118,10 +118,10 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
 				$installer->getTable('emakina_blog_posts'),
 				$setup->getIdxName(
 					$installer->getTable('emakina_blog_posts'),
-					['post_title'],
+					['post_title', 'post_url'],
 					\Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
 				),
-				['post_title'],
+				['post_title', 'post_url'],
 				\Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_FULLTEXT
 			);
 		}
