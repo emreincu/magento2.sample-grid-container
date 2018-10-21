@@ -38,7 +38,7 @@
                 <item name="sticky" xsi:type="boolean">true</item>
             </item>
         </argument>
-        <bookmark name="bookmarks"/>
+        
         <columnsControls name="columns_controls"/>
         <filterSearch name="fulltext"/>
         <filters name="listing_filters" />
@@ -78,15 +78,17 @@
         <column name="post_id">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">1</item>
                     <item name="filter" xsi:type="string">textRange</item>
                     <item name="sorting" xsi:type="string">asc</item>
                     <item name="label" xsi:type="string" translate="true">ID</item>
                 </item>
             </argument>
         </column>
-        <column name="name">
+        <column name="post_title">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">2</item>
                     <item name="filter" xsi:type="string">text</item>
                     <item name="editor" xsi:type="array">
                         <item name="editorType" xsi:type="string">text</item>
@@ -98,9 +100,19 @@
                 </item>
             </argument>
         </column>
-        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
+        <column name="post_viewCount">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">3</item>
+                    <item name="filter" xsi:type="string">text</item>
+                    <item name="label" xsi:type="string" translate="true">View Count</item>
+                </item>
+            </argument>
+        </column>
+        <column name="post_createdDate" class="Magento\Ui\Component\Listing\Columns\Date">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">98</item>
                     <item name="filter" xsi:type="string">dateRange</item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
@@ -108,9 +120,10 @@
                 </item>
             </argument>
         </column>
-        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date">
+        <column name="post_updatedDate" class="Magento\Ui\Component\Listing\Columns\Date">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">99</item>
                     <item name="filter" xsi:type="string">dateRange</item>
                     <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/date</item>
                     <item name="dataType" xsi:type="string">date</item>
@@ -121,6 +134,7 @@
         <actionsColumn name="actions" class="Emakina\Blog\Ui\Post\Listing\Grid\Column\Actions">
            <argument name="data" xsi:type="array">
                <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">101</item>
                    <item name="resizeEnabled" xsi:type="boolean">false</item>
                    <item name="resizeDefaultWidth" xsi:type="string">107</item>
                    <item name="indexField" xsi:type="string">post_id</item>

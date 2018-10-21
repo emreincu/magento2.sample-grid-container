@@ -9,12 +9,12 @@ tr:nth-child(even) { background-color: #dddddd; }
 <table>
     <tr>
         <th class="post-id">Id</th>
-        <th class="post-name">Name</th>
+        <th class="post-name">Title</th>
     </tr>
     <?php foreach($block->getAllPosts() as $key=>$post): ?>
         <tr>
             <td><?= $post->getPostId() ?></td>
-            <td><?= $post->getName() ?></td>
+            <td><?= $post->getPostTitle() ?></td>
         </tr>
     <?php endforeach ?>
   
