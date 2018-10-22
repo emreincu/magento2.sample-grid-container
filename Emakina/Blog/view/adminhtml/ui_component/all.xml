@@ -132,14 +132,32 @@
             </argument>
         </column>
         <actionsColumn name="actions" class="Emakina\Blog\Ui\Post\Listing\Grid\Column\Actions">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">post_id</item>
+                     <item name="label" xsi:type="string" translate="true">Actions</item>
+                </item>
+            </argument>
+        </actionsColumn>
+        <!-- 
+        <actionsColumn name="actions" class="Emakina\Blog\Ui\Post\Listing\Grid\Column\Actions">
            <argument name="data" xsi:type="array">
                <item name="config" xsi:type="array">
                     <item name="sortOrder" xsi:type="number">101</item>
-                   <item name="resizeEnabled" xsi:type="boolean">false</item>
-                   <item name="resizeDefaultWidth" xsi:type="string">107</item>
-                   <item name="indexField" xsi:type="string">post_id</item>
+                    <item name="resizeEnabled" xsi:type="boolean">true</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">107</item>
+                    <item name="indexField" xsi:type="string">post_id</item>
+               </item>
+           </argument>
+           <argument name="data" xsi:type="array">
+               <item name="config" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">102</item>
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">107</item>
+                    <item name="indexField" xsi:type="string">post_id</item>
                </item>
            </argument>
        </actionsColumn>
+       -->
     </columns>
 </listing>

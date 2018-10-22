@@ -3,6 +3,7 @@ namespace Emakina\Blog\Controller\Adminhtml\Post;
 use Magento\Framework\App\Filesystem\DirectoryList;
 use Magento\Backend\App\Action;
 use Emakina\Blog\Model\Post as Post;
+use Emakina\Blog\Model\Post\Constant\Constants;
 
  
 class PostForm extends \Magento\Backend\App\Action 
@@ -30,47 +31,70 @@ class PostForm extends \Magento\Backend\App\Action
     {
         $this->_view->loadLayout();
         $this->_view->renderLayout();
+        
+        $postData = $this->getRequest()->getParam('post');
+        $postImage = $this->getRequest()->getFiles('post')['post_image'];
 
-        /* We check if we receive the parameter "post" (if the form is sent), 
-        if yes then we save the post in the database 
-        */
-       
-        $postDatas = $this->getRequest()->getParam('post');
-        $fileDatas = $this->getRequest()->getFiles('post');
-        if(is_array($postDatas)) {
-            $post = $this->_objectManager->create(Post::class);
-            $postUrl = urlEncode($postDatas['post_title']);
+        if(is_array($postData)) {
+            $isFormOkey = true;
 
-            if(isset($fileDatas['post_image'])) {
+            $postData['post_url'] = $this->createUrl($postData['post_title']);
+            if($postImage['size'] > 0) {
                 try{
-                    $postImage = explode(".", $fileDatas['post_image']['name']);
+                    $postImageNameArray= explode(".", $postImage['name']);
+                    $postImageName = md5(time() . $postImageNameArray[0]).".". end($postImageNameArray);
                     
-                    $target = $this->_mediaDirectory->getAbsolutePath('customUploads/');        
-                    /** @var $uploader \Magento\MediaStorage\Model\File\Uploader */
-                    $uploader = $this->_fileUploaderFactory->create(['fileId' => $fileDatas['post_image']]);
-                    /** Allowed extension types */
+                    $target = $this->_mediaDirectory->getAbsolutePath(Constants::IMG_UPL_PATH); 
+                    $uploader = $this->_fileUploaderFactory->create(['fileId' => $postImage]);
                     $uploader->setAllowedExtensions(['jpg', 'jpeg', 'gif', 'png', 'zip', 'doc']);
-                    /** rename file name if already exists */
                     $uploader->setAllowRenameFiles(true);
-                    /** upload file in folder "mycustomfolder" */
-                    $postImageName = md5(time() . $postImage[0]).".".$postImage[1];
                     $result = $uploader->save($target, $postImageName);
-                    if ($result['file']) {
-                        //$this->messageManager->addSuccess(__('File has been successfully uploaded'));
-                        $imageName = $postImageName;
-                        $postDatas['post_image'] = $imageName;
+                    if (!$result['file']) {
+                        $this->messageManager->addError(__('The image could not uploaded!'));
+                        $isFormOkey = false;
                     }
-                    //return $this->_redirect('emakina_blog/post/postform');
+                    $postData['post_image'] = $postImageName;
                 } catch (\Exception $e) {
                     $this->messageManager->addError($e->getMessage());
+                    $isFormOkey = false;
+                }
+            }else{
+                if(!isset($postData['post_id'])) {
+                    $this->messageManager->addError(__('Please select a post image!'));
+                    $isFormOkey = false;
+                }
+            }
+            
+            $redirectUrl = "allposts";
+            if(!$isFormOkey) {
+                if(!isset($postData['post_id'])){
+                    return $this->_redirect('*/*/postform');
+                }else{
+                    return $this->_redirect('*/*/postform/post_id/' . $postData['post_id']);
                 }
             }
 
-            $postDatas['post_url'] = $postUrl;
-            $post->setData($postDatas)->save();
+            $post = $this->_objectManager->create(Post::class);
+            $post->setData($postData)->save();
+
+            $this->messageManager->addSuccess(__('Post has beeen saved sucessfully'));
             $resultRedirect = $this->resultRedirectFactory->create();
             return $resultRedirect->setPath('*/*/allposts');
         }
 
+
+    }
+
+    private function createUrl($text) {
+        $text = preg_replace('~[^\pL\d]+~u', '-', $text);
+        $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+        $text = preg_replace('~[^-\w]+~', '', $text);
+        $text = trim($text, '-');
+        $text = preg_replace('~-+~', '-', $text);
+        $text = strtolower($text);
+        if (empty($text)) {
+            return 'n-a';
+        }
+        return $text;
     }
 }
