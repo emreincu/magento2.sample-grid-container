@@ -1,0 +1,46 @@
+<style>
+    .posts {
+        width:80%;
+        margin:0px auto;
+        padding:20px;
+    }
+    .post {
+        width:30%;
+        float:left;
+        padding:10px;
+    }
+    .post-container {
+        border:1px solid #333;
+        padding:10px;
+    }
+    .post-body{
+    }
+</style>
+
+<div class="posts">
+    <?php foreach($block->getAllPosts() as $key=>$post): ?>
+        <div class="post">
+            <div class="post-container">
+                <div class="post-header">
+                    <?= $post->getPostId() ?>
+                </div>
+                <div class="post-body">
+                    <?= $post->getPostTitle() ?>
+                </div>
+                <div class="post-footer">
+                </div>
+            </div>
+        </div>
+    <?php endforeach ?>
+</div>
+
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script>
+    var $grid = $('.posts').masonry({
+        itemSelector: '.post',
+        percentPosition: true
+    });
+    $grid.imagesLoaded().progress( function() {
+        $grid.masonry('layout');
+    });
+</script>
