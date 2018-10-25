@@ -17,7 +17,6 @@ class MassDelete extends Post
      * @var Filter
      */
     protected $filter;
-
     /**
      * @var CollectionFactory
      */
