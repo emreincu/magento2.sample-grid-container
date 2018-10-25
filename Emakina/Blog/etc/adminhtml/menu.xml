@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Emakina_Blog::blog" title="Emakina Blog" module="Emakina_Blog" sortOrder="51" resource="Emakina_Blog::blog"/>
+        <add id="Emakina_Blog::posts" title="Manage Posts" module="Emakina_Blog" sortOrder="10" action="emakina_blog/post/allposts" resource="Emakina_Blog::posts" parent="Emakina_Blog::blog"/>
+        <add id="Emakina_Blog::postform" title="Add a new post" module="Emakina_Blog" sortOrder="10" action="emakina_blog/post/postform" resource="Emakina_Blog::postform" parent="Emakina_Blog::blog"/>
+    </menu>
+</config>
