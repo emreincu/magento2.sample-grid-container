@@ -4,7 +4,7 @@ namespace Emakina\Blog\Block;
 
 use Magento\Framework\Data\Tree\NodeFactory;
 
-class Topmenu
+class TopMenu
 {
     /**
      * @var NodeFactory
