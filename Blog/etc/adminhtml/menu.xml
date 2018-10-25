@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Emakina_Blog:post"
+             title="Emakina Blog"
+             module="Emakina_Blog"
+             sortOrder="75" resource="Emakina_Blog::post"
+             action="emakinablog/post/index"/>
+    </menu>
+</config>
