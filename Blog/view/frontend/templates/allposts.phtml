@@ -1,0 +1,102 @@
+<style>
+    .container {
+        width:100%;
+        margin:0px auto;
+        padding:20px;
+    }
+    .row {
+        padding:10px;
+    }
+    .col-sm-6 {
+        width:33%;
+        float:left;
+        box-sizing:border-box;
+    }
+    .border {
+        border: 1px solid #f1f1f1;
+    }
+    .border-0 {
+        border:0px;
+    }
+    .float-left {
+        float:left;
+    }
+    .p-10 {
+        padding:10px;
+    }
+    .mb-10 {
+        margin-bottom:10px;
+    }
+    .mt-10 {
+        margin-top:10px;
+    }
+    .w-100 {
+        width:100% !important;
+    }
+    .relative{
+        position:relative;
+    }
+    .absolute{
+        position:absolute;
+    }
+    .abs-center {
+        left:0px;
+        right:0px;
+        margin-left:0px;
+        margin-right:0px;
+    }
+    .abs-bottom {
+        bottom:20px;
+    }
+    .post-title {
+        font-weight:bold;
+        font-size:18px;
+        color:#fff;
+        text-align:center;
+        text-shadow:0px 1px 2px #000;
+    }
+</style>
+<h3>All Posts</h3>
+<div class="container">
+    <div class="row all-posts">
+        <center>
+            <img class="loading" src = "<?= $block->getPostImageUrl() ?>post/images/loading.gif" width="100px">
+        </center>
+    </div>
+</div>
+
+<script type="text/javascript">
+require([
+    'jquery',
+    'jquery/ui'
+], function($){
+    $(document).ready( function() {
+        request = $.ajax({
+            cache: false,
+            url: "<?= $block->getBaseUrl() ?>rest/V1/post/getAll",
+            type: "get"
+        });
+        request.done(function (response, textStatus, jqXHR){
+            var html="";
+            $.each(response,function(i, item) {
+                html+="<div class=\"col-sm-6 p-10 float-left\">";
+                html+="<div class=\"post-container border p-10 relative\">";
+                html+=  "<a href = \"<?= $block->getBaseUrl() ?>blog/index/post/post_url/"+ item['post_url'] +"\">";
+                html+=     "<div class=\"post-header absolute abs-center abs-bottom\">";
+                html+=         "<div class=\"post-title\">" + item['post_title'] +"</div>";
+                html+=      "</div>";
+                html+=      "<div class=\"post-body\">"
+                html+="          <img src = \"<?= $block->getPostImageUrl() ?>post/images/"+ item['post_image'] +"\">";
+                html+=      "</div>";
+                html+=      "<div class=\"post-footer\">";
+                html+=      "</div>";
+                html+=  "</a>"; 
+                html+="</div>";
+                html+="</div>";
+            });
+            $('.all-posts').html(html);
+            $('.loading').hide();
+        });
+    });
+});
+</script>

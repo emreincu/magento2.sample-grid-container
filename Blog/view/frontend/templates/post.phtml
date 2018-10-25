@@ -1,0 +1,135 @@
+<style>
+    .container {
+        width:100%;
+        margin:0px auto;
+        padding:20px;
+    }
+    .row {
+        padding:10px;
+    }
+    .col-sm-6 {
+        width:50%;
+        float:left;
+        box-sizing:border-box;
+    }
+    .col-12 {
+        width:100%;
+    }
+    .border {
+        border: 1px solid #f1f1f1;
+    }
+    .border-0 {
+        border:0px;
+    }
+    .float-left {
+        float:left;
+    }
+    .p-10 {
+        padding:10px;
+    }
+    .mb-10 {
+        margin-bottom:10px;
+    }
+    .mt-10 {
+        margin-top:10px;
+    }
+    .p-0 {
+        padding:0px;
+    }
+    .w-100 {
+        width:100% !important;
+    }
+    .relative{
+        position:relative;
+    }
+    .absolute{
+        position:absolute;
+    }
+    .abs-center {
+        left:0px;
+        right:0px;
+        margin-left:0px;
+        margin-right:0px;
+    }
+    .abs-bottom {
+        bottom:20px;
+    }
+    .abs-top {
+        top:20px;
+    }
+
+    .text-right {
+        text-align:right;
+    }
+
+    .post-title {
+        font-size:32px;
+        color:#fff;
+        text-align:center;
+        text-shadow:0px 1px 2px #000;
+    }
+
+    .post-container {
+        padding:0px;
+        margin:0px 0px 20px 0px;
+    }
+
+    .post-header {
+        overflow:hidden;
+        height:70vh;
+    }
+
+
+    .post-image{
+        object-fit: cover;
+        width:100%;
+    }
+
+    .loading {
+        width:250px !important;
+        margin:0px auto !important;
+    }
+    
+
+</style>
+<div class="container p-0">
+    <div class="row border p-0">
+        <div class ="col-12 post-header border relative">
+            <div class="post-title absolute abs-bottom abs-center"></div>
+            <center>
+                <img class="post-image loading" src = "<?= $block->getPostImageUrl() ?>post/images/loading.gif" width="100px">
+            </center>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row  text-right">
+        <b>Updated at</b> <div class="post-updated-date"></div>
+    </div>
+    <div class="row">
+        <div class="post-content"></div>
+    </div>
+</div>
+<img src="{{view url=post/images/loading.gif}}" alt="" />
+<script type="text/javascript">
+require([
+    'jquery',
+    'jquery/ui'
+], function($){
+    $(document).ready( function() {
+        request = $.ajax({
+            cache: false,
+            url: "<?= $block->getBaseUrl() ?>rest/V1/post/getById/<?= $block->getPostId() ?>",
+            type: "get"
+        });
+        request.done(function (response, textStatus, jqXHR){
+            response = response[0];
+            $('.post-title').html(response['post_title']);
+            $('.post-image').attr("src", '<?= $block->getPostImageUrl() ?>post/images/'+response['post_image']);
+            $('.post-image').removeClass('loading');
+            $('.post-content').html(response['post_content']);
+            $('.post-updated-date').html(response['post_createdDate']);
+        });
+    });
+});
+</script>
