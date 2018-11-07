@@ -1,6 +1,5 @@
 <?php
 namespace Emakina\Blog\Block\Adminhtml\Comment\Details\Buttons;
-
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 class Save extends Generic implements ButtonProviderInterface

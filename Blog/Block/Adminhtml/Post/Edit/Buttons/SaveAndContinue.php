@@ -1,14 +1,12 @@
 <?php
 
 namespace Emakina\Blog\Block\Adminhtml\Post\Edit\Buttons;
-
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 class SaveAndContinue extends Generic implements ButtonProviderInterface
 {
     /**
      * Get button data
-     *
      * @return array
      */
     public function getButtonData()

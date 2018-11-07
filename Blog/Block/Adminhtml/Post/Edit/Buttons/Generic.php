@@ -1,6 +1,5 @@
 <?php
 namespace Emakina\Blog\Block\Adminhtml\Post\Edit\Buttons;
-
 use Emakina\Blog\Api\PostRepositoryInterface;
 use Magento\Backend\Block\Widget\Context;
 use Magento\Framework\Exception\NoSuchEntityException;
@@ -31,7 +30,6 @@ class Generic
 
     /**
      * Return Post ID
-     *
      * @return int|null
      */
     public function getPostId()
@@ -47,7 +45,6 @@ class Generic
 
     /**
      * Generate url by route and parameters
-     *
      * @param   string $route
      * @param   array $params
      * @return  string

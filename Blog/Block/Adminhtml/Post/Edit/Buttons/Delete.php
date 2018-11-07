@@ -1,6 +1,5 @@
 <?php
 namespace Emakina\Blog\Block\Adminhtml\Post\Edit\Buttons;
-
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
 class Delete extends Generic implements ButtonProviderInterface
