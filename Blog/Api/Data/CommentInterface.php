@@ -3,7 +3,7 @@ namespace Emakina\Blog\Api\Data;
 
 interface CommentInterface
 {
-    const COMMENT_ID = 'comment_id'; //PK
+    const COMMENT_ID = 'comment_id'; //Primary Key
     const POST_ID = 'post_id';
     const USER_ID = 'user_id';
     const MESSAGE = 'message';

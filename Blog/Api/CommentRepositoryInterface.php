@@ -1,6 +1,5 @@
 <?php
 namespace Emakina\Blog\Api;
-
 use Emakina\Blog\Api\Data\CommentInterface;
 
 /**
@@ -11,7 +10,6 @@ interface CommentRepositoryInterface
     
     /**
      * Save comment.
-     *
      * @param CommentInterface $comment
      * @return CommentInterface
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -34,7 +32,6 @@ interface CommentRepositoryInterface
      * @param int $postId
      * @return \Emakina\Blog\Api\Data\CommentInterface
      * @throws \Magento\Framework\Exception\LocalizedException
-     * 
      */
     public function getByPostId($postId);
 
@@ -47,7 +44,6 @@ interface CommentRepositoryInterface
      * 
      */
     public function getById($commentId);
-
 
     /**
      * Delete comment.

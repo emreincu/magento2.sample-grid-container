@@ -3,7 +3,7 @@ namespace Emakina\Blog\Api\Data;
 
 interface PostInterface
 {
-    const POST_ID = 'post_id'; //PK
+    const POST_ID = 'post_id'; //Primary Key
     const IMAGE = 'image';
     const TITLE = 'title';
     const CONTENT = 'content';

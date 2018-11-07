@@ -1,6 +1,5 @@
 <?php
 namespace Emakina\Blog\Api;
-
 use Emakina\Blog\Api\Data\PostInterface;
 
 /**
@@ -10,7 +9,6 @@ interface PostRepositoryInterface
 {
     /**
      * Save post.
-     *
      * @param PostInterface $post
      * @return PostInterface
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -23,10 +21,8 @@ interface PostRepositoryInterface
      * @param int $postId
      * @return \Emakina\Blog\Api\Data\PostInterface
      * @throws \Magento\Framework\Exception\LocalizedException
-     * 
      */
     public function getById($postId);
-
 
     /**
      * Retrieve Post.
@@ -34,7 +30,6 @@ interface PostRepositoryInterface
      * @param string $postUrl
      * @return \Emakina\Blog\Api\Data\PostInterface
      * @throws \Magento\Framework\Exception\LocalizedException
-     * 
      */
     public function getByUrl($postUrl);
     
@@ -43,13 +38,11 @@ interface PostRepositoryInterface
      * @api
      * @return \Emakina\Blog\Api\Data\PostInterface
      * @throws \Magento\Framework\Exception\LocalizedException
-     * 
      */
     public function getAll();
 
     /**
      * Delete image.
-     *
      * @param PostInterface $image
      * @return bool true on success
      * @throws \Magento\Framework\Exception\LocalizedException
@@ -58,7 +51,6 @@ interface PostRepositoryInterface
 
     /**
      * Delete post by ID.
-     *
      * @param int $postId
      * @return bool true on success
      * @throws \Magento\Framework\Exception\NoSuchEntityException
