@@ -97,3 +97,4 @@
     <preference for="Emakina\Blog\Api\CommentRepositoryInterface" type="Emakina\Blog\Model\CommentRepository" />
     
 </config>
+
