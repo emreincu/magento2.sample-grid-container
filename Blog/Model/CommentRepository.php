@@ -135,28 +135,36 @@ class CommentRepository implements CommentRepositoryInterface
         else return false;
     }
 
+    /**
+     * Retrieve Post.
+     * @api
+     * @param int $commentId
+     * @return \Emakina\Blog\Api\Data\CommentInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * 
+     */
+    public function getById($commentId) {
+
+        if (!isset($this->instances[$commentId])) {
+            $comment = $this->commentInterfaceFactory->create();
+            $this->resource->load($comment, $commentId);
+            if (!$comment->getCommentId()) {
+                throw new NoSuchEntityException(__('Requested Comment doesn\'t exist'));
+            }
+            $this->instances[$commentId] = $comment;
+        }
+        return $this->instances[$commentId];
+    }
 
     /**
-     * Retrieve All Comments.
+     * Retrieve All Comments By Post ID.
      * @api
      * @param int $postId
      * @return \Emakina\Blog\Api\Data\CommentInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      */
-    public function getById($postId) {
-        /*
-        if (!isset($this->instances[$postId])) {
-            $comment = $this->commentInterfaceFactory->create();
-            $this->resource->load($comment, $postId);
-            if (!$comment->getCommentId()) {
-                throw new NoSuchEntityException(__('Requested Comment doesn\'t exist'));
-            }
-            $this->instances[$postId] = $comment;
-        }
+    public function getByPostId($postId) {
         
-        return $this->instances[$postId];
-        */
-    
         
         try{
             $comment = $this->commentInterfaceFactory->create();
@@ -175,12 +183,7 @@ class CommentRepository implements CommentRepositoryInterface
                 $data[$key]['user_firstname'] = ($customer->getFirstname() == null) ? "" : $customer->getFirstname();
                 $data[$key]['user_middlename'] = ($customer->getMiddlename() == null) ? "" : $customer->getMiddlename();
                 $data[$key]['user_lastname'] = ($customer->getLastname() == null) ? "" : $customer->getLastname();
-                /*
-                $data[$key]['user_email'] = "emreincu@gmail.com";
-                $data[$key]['user_firstname'] = "yunus";
-                $data[$key]['user_middlename'] = "emre";
-                $data[$key]['user_lastname'] = "incu";
-                */
+
             }
             return $data;
         }catch(\Exception $e) {

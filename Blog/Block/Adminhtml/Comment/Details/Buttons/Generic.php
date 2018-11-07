@@ -36,14 +36,13 @@ class Generic
      */
     public function getCommentId()
     {
-        $a = $this->commentRepository->getById(
-            $this->context->getRequest()->getParam('comment_id')
-        );
-        if($a != null) {
-            return $a[0]['post_id'];
+        try {
+            return $this->commentRepository->getById(
+                $this->context->getRequest()->getParam('comment_id')
+            )->getId();
+        } catch (NoSuchEntityException $e) {
+            return null;
         }
-        return null;
-        
     }
 
     /**

@@ -1,8 +1,8 @@
 <?php
-namespace Emakina\Blog\Controller\Adminhtml\Post;
-use Emakina\Blog\Api\PostRepositoryInterface;
-use Emakina\Blog\Controller\Adminhtml\Post;
-use Emakina\Blog\Model\ResourceModel\Post\CollectionFactory;
+namespace Emakina\Blog\Controller\Adminhtml\Comment;
+use Emakina\Blog\Api\CommentRepositoryInterface;
+use Emakina\Blog\Controller\Adminhtml\Comment;
+use Emakina\Blog\Model\ResourceModel\Comment\CollectionFactory;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Registry;
@@ -10,7 +10,7 @@ use Magento\Framework\Stdlib\DateTime\Filter\Date;
 use Magento\Framework\View\Result\PageFactory;
 use Magento\Ui\Component\MassAction\Filter;
 
-class MassDelete extends Post
+class MassDelete extends Comment
 {
     /**
      * @var Filter
@@ -35,7 +35,7 @@ class MassDelete extends Post
      * MassAction constructor.
      *
      * @param Registry $registry
-     * @param PostRepositoryInterface $postRepository
+     * @param CommentRepositoryInterface $commentRepository
      * @param PageFactory $resultPageFactory
      * @param Date $dateFilter
      * @param Context $context
@@ -46,7 +46,7 @@ class MassDelete extends Post
      */
     public function __construct(
         Registry $registry,
-        PostRepositoryInterface $postRepository,
+        CommentRepositoryInterface $commentRepository,
         PageFactory $resultPageFactory,
         Date $dateFilter,
         Context $context,
@@ -55,7 +55,7 @@ class MassDelete extends Post
         $successMessage,
         $errorMessage
     ) {
-        parent::__construct($registry, $postRepository, $resultPageFactory, $dateFilter, $context);
+        parent::__construct($registry, $commentRepository, $resultPageFactory, $dateFilter, $context);
         $this->filter = $filter;
         $this->collectionFactory = $collectionFactory;
         $this->successMessage = $successMessage;
@@ -72,8 +72,8 @@ class MassDelete extends Post
         try {
             $collection = $this->filter->getCollection($this->collectionFactory->create());
             $collectionSize = $collection->getSize();
-            foreach ($collection as $post) {
-                $post->delete();
+            foreach ($collection as $comment) {
+                $comment->delete();
             }
             $this->messageManager->addSuccessMessage(__($this->successMessage, $collectionSize));
         } catch (LocalizedException $e) {

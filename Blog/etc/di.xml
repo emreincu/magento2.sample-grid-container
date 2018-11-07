@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
     
-    <virtualType name="Emakina\Blog\Model\ResourceModel\Post\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <virtualType name="Emakina\Blog\Model\ResourceModel\Post\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">emakina_blog_posts</argument>
             <argument name="resourceModel" xsi:type="string">Emakina\Blog\Model\ResourceModel\Post</argument>
@@ -10,12 +10,12 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="emakinablog_post_grid_data_source" xsi:type="string">Emakina\Blog\Model\ResourceModel\Post\Collection</item>
+                <item name="emakinablog_post_grid_data_source" xsi:type="string">Emakina\Blog\Model\ResourceModel\Post\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
 
-    <virtualType name="Emakina\Blog\Model\ResourceModel\Comment\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+    <virtualType name="Emakina\Blog\Model\ResourceModel\Comment\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
         <arguments>
             <argument name="mainTable" xsi:type="string">emakina_blog_comments</argument>
             <argument name="resourceModel" xsi:type="string">Emakina\Blog\Model\ResourceModel\Comment</argument>
@@ -24,7 +24,7 @@
     <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
         <arguments>
             <argument name="collections" xsi:type="array">
-                <item name="emakinablog_comment_grid_data_source" xsi:type="string">Emakina\Blog\Model\ResourceModel\Comment\Collection</item>
+                <item name="emakinablog_comment_grid_data_source" xsi:type="string">Emakina\Blog\Model\ResourceModel\Comment\Grid\Collection</item>
             </argument>
         </arguments>
     </type>
@@ -78,6 +78,12 @@
     </type>
 
     <type name="Emakina\Blog\Controller\Adminhtml\Post\MassDelete">
+        <arguments>
+            <argument name="successMessage" xsi:type="string" translate="true">A total of %1 record(s) have been deleted.</argument>
+            <argument name="errorMessage" xsi:type="string" translate="true">An error occurred while deleting record(s).</argument>
+        </arguments>
+    </type>
+    <type name="Emakina\Blog\Controller\Adminhtml\Comment\MassDelete">
         <arguments>
             <argument name="successMessage" xsi:type="string" translate="true">A total of %1 record(s) have been deleted.</argument>
             <argument name="errorMessage" xsi:type="string" translate="true">An error occurred while deleting record(s).</argument>

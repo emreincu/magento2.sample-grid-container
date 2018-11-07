@@ -36,7 +36,17 @@ interface CommentRepositoryInterface
      * @throws \Magento\Framework\Exception\LocalizedException
      * 
      */
-    public function getById($postId);
+    public function getByPostId($postId);
+
+    /**
+     * Retrieve Post.
+     * @api
+     * @param int $commentId
+     * @return \Emakina\Blog\Api\Data\CommentInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * 
+     */
+    public function getById($commentId);
 
 
     /**

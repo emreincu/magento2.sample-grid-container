@@ -21,8 +21,8 @@
         </resources>
 	</route>
 
-    <route method="GET" url="/V1/comment/getById/:postId">
-		<service class="Emakina\Blog\Api\CommentRepositoryInterface" method="getById"/>
+    <route method="GET" url="/V1/comment/getByPostId/:postId">
+		<service class="Emakina\Blog\Api\CommentRepositoryInterface" method="getByPostId"/>
 		<resources>
             <resource ref="anonymous"/>
         </resources>

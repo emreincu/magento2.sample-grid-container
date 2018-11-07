@@ -227,7 +227,7 @@ require([
         if(postId != -1) {
             request = $.ajax({
                 cache: false,
-                url: "<?= $block->getBaseUrl() ?>rest/V1/comment/getById/" + postId,
+                url: "<?= $block->getBaseUrl() ?>rest/V1/comment/getByPostId/" + postId,
                 type: "get"
             });
             request.done(function (response, textStatus, jqXHR){
