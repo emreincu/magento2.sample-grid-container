@@ -1,16 +1,34 @@
 <?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
     <menu>
-<<<<<<< HEAD
+    <!-- 
         <add id="Emakina_Blog:post"
              title="Emakina Blog"
              module="Emakina_Blog"
              sortOrder="75" resource="Emakina_Blog::post"
              action="emakinablog/post/index"/>
-=======
-        <add id="Emakina_Blog::blog" title="Emakina Blog" module="Emakina_Blog" sortOrder="51" resource="Emakina_Blog::blog"/>
-        <add id="Emakina_Blog::posts" title="Manage Posts" module="Emakina_Blog" sortOrder="10" action="emakina_blog/post/allposts" resource="Emakina_Blog::posts" parent="Emakina_Blog::blog"/>
-        <add id="Emakina_Blog::postform" title="Add a new post" module="Emakina_Blog" sortOrder="10" action="emakina_blog/post/postform" resource="Emakina_Blog::postform" parent="Emakina_Blog::blog"/>
->>>>>>> 74362728bbe9ac66d86dc372662e1af429d79fa6
+    -->
+        <add id="Emakina_Blog::post"
+            title="Emakina Blog"
+            module="Emakina_Blog"
+            sortOrder="51"
+            resource="Emakina_Blog::post"/>
+
+        <add id="Emakina_Blog::allPosts"
+            title="Manage Posts"
+            module="Emakina_Blog"
+            sortOrder="10"
+            action="emakinablog/post/index"
+            resource="Emakina_Blog::allPosts"
+            parent="Emakina_Blog::post"/>
+        
+        <add id="Emakina_Blog::addPost"
+            title="Add a New Post"
+            module="Emakina_Blog"
+            sortOrder="10"
+            action="emakinablog/post/add"
+            resource="Emakina_Blog::addPost"
+            parent="Emakina_Blog::post"/>
+
     </menu>
 </config>

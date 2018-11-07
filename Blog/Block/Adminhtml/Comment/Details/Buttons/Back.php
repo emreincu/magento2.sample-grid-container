@@ -1,6 +1,6 @@
 <?php
 
-namespace Emakina\Blog\Block\Adminhtml\Post\Edit\Buttons;
+namespace Emakina\Blog\Block\Adminhtml\Comment\Details\Buttons;
 
 use Magento\Framework\View\Element\UiComponent\Control\ButtonProviderInterface;
 
@@ -20,4 +20,5 @@ class Back extends Generic implements ButtonProviderInterface
             'sort_order' => 10,
         ];
     }
+
 }

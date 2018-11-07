@@ -71,23 +71,77 @@ class PostRepository implements PostRepositoryInterface
 
     /**
      * Get Post record
-     *
-     * @param $postId
-     * @return mixed
-     * @throws NoSuchEntityException
+     * @api
+     * @param int $postId
+     * @return \Emakina\Blog\Api\Data\PostInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
      */
     public function getById($postId)
     {
+        
         if (!isset($this->instances[$postId])) {
             $post = $this->postInterfaceFactory->create();
             $this->resource->load($post, $postId);
-            if (!$post->getId()) {
+            if (!$post->getPostId()) {
                 throw new NoSuchEntityException(__('Requested Post doesn\'t exist'));
             }
             $this->instances[$postId] = $post;
         }
+        
         return $this->instances[$postId];
+        
+
+        /*
+        try{
+            $post = $this->postInterfaceFactory->create();
+            $post =  $post->getCollection()->addFieldToFilter('post_id',$postId);
+            $data = $post->getData()[0];
+            if(empty($data))
+                return "Post is missing!";
+            else 
+                return $data;
+        }catch(\Exception $e) {
+            return $e;
+        }
+        */
     }
+
+
+    /**
+     * Retrieve Post.
+     * @api
+     * @param string $postUrl
+     * @return \Emakina\Blog\Api\Data\PostInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * 
+     */
+    public function getByUrl($postUrl)
+    {
+        
+        try{
+            $post = $this->postInterfaceFactory->create();
+            $post =  $post->getCollection()->addFieldToFilter('url',$postUrl);
+            $data = $post->getData();
+            if(empty($data)) {
+                return null;
+            }
+            return $data;
+        }catch(\Exception $e) {
+            return $e;
+        }
+            
+    }
+
+    /**
+     * Retrieve All Posts.
+     * @api
+     * @return \Emakina\Blog\Api\Data\PostInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getAll() {
+        return $this->postCollectionFactory->create()->getData();
+    }   
+
 
     /**
      * @param PostInterface $post

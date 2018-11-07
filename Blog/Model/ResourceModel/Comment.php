@@ -2,7 +2,7 @@
 namespace Emakina\Blog\Model\ResourceModel;
 
 
-class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
+class Comment extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
 {
 	
 	public function __construct(
@@ -19,7 +19,7 @@ class Post extends \Magento\Framework\Model\ResourceModel\Db\AbstractDb
      */
 	protected function _construct()
 	{
-		$this->_init('emakina_blog_posts', 'post_id');
+		$this->_init('emakina_blog_comments', 'comment_id');
 	}
 	
 }

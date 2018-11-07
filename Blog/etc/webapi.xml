@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <route method="GET" url="/V1/post/getById/:postId">
+		<service class="Emakina\Blog\Api\PostRepositoryInterface" method="getById"/>
+		<resources>
+            <resource ref="anonymous"/>
+        </resources>
+	</route>
+
+    <route method="GET" url="/V1/post/getByUrl/:postUrl">
+		<service class="Emakina\Blog\Api\PostRepositoryInterface" method="getByUrl"/>
+		<resources>
+            <resource ref="anonymous"/>
+        </resources>
+	</route>
+
+    <route method="GET" url="/V1/post/getAll">
+		<service class="Emakina\Blog\Api\PostRepositoryInterface" method="getAll"/>
+		<resources>
+            <resource ref="anonymous"/>
+        </resources>
+	</route>
+
+    <route method="GET" url="/V1/comment/getById/:postId">
+		<service class="Emakina\Blog\Api\CommentRepositoryInterface" method="getById"/>
+		<resources>
+            <resource ref="anonymous"/>
+        </resources>
+	</route>
+
+    <route method="POST" url="/V1/comment/addComment">
+		<service class="Emakina\Blog\Api\CommentRepositoryInterface" method="addComment"/>
+		<resources>
+            <resource ref="anonymous"/>
+        </resources>
+	</route>
+</routes>

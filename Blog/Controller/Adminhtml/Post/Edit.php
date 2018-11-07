@@ -15,7 +15,7 @@ class Edit extends Post
         $resultPage->setActiveMenu('Emakina_Blog::post')
             ->addBreadcrumb(__('Posts'), __('Posts'))
             ->addBreadcrumb(__('Manage Posts'), __('Manage Posts'));
-
+        
         if (!$postId) {
             $resultPage->addBreadcrumb(__('New Post'), __('New Post'));
             $resultPage->getConfig()->getTitle()->prepend(__('New Post'));

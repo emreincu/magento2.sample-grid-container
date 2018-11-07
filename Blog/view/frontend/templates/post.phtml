@@ -1,0 +1,275 @@
+<style>
+    .m-3 {
+        margin:20px !important;
+    }
+    .m-4 {
+        margin:10px !important;
+    }
+    .p-3{
+        padding:20px !important;
+    }
+    .p-4 {
+        padding:10px !important;
+    }
+    .mt-2 {
+        margin-top:50px;
+    }
+    .mt-3 {
+        margin-top:30px;
+    }
+    .mb-3 {
+        margin-bottom:30px;
+    }
+    .white {
+        color:#fff !important;
+    }
+    .bg-light {
+        padding:20px;
+    }
+    .post-title {
+        text-align:center;
+        color:#17202A;
+        position:relative;
+        display:inline-block;
+        width:100%;
+    }
+    .post-title:after {
+        content:'';
+        position:absolute;
+        left:0;right:0;
+        top:100%;
+        margin: 10px auto;
+        width:70%;
+        height:3px;
+        background:#EC7063;
+    }
+    
+    .comment-notice {
+        font-size:16px;
+        text-align:center;
+        padding:7px;
+    }
+
+    .error {
+        border:1px solid red;
+        color:red;
+    }
+    .success {
+        border:1px solid green;
+        color:green;
+    }
+
+</style>
+<div class = 'main-container'>
+<div class="container p-0">
+    <div class="row border p-0">
+        <div class ="col-12 post-header border relative">
+            <div class="transparent"></div>
+            <center>
+                <img class="post-image img-fluid img-rounded loading" src = "<?= $block->getPostImageBasePath() ?>loading.gif" width="100px">
+            </center>
+        </div>
+    </div>
+    <div class="row">
+        <div class="post-title"></div>
+    </div>
+</div>
+<div class="container mt-2">
+    <div class="row text-right">
+        <h5 class="text-right">
+            <span class="label label-default p-4 white">Updated at</span>
+            <span class="post-updated-date label label-primary p-4 white"></span>
+        </h5>
+    </div>
+    <div class="row bg-light">
+        <div class="post-content"></div>
+    </div>
+    <div class="row">
+        <h4>Keywords</h4>
+        <h5 class="tags mt-3"></h5>
+    </div>
+</div>
+<div class="container comments-container">
+    <div class="row">
+        <h1>Comments</h1>
+    </div>
+    <div class="row">
+        <div class = "col-sm-12">
+            <div class = "comment-form mb-3">
+            <?php
+                if($block->getCurrentCosturmerData() != null) {
+                    $currentCostumerData = $block->getCurrentCosturmerData();
+                    $curCosId = $currentCostumerData->getCustomerId();
+                    $curCosFullname =
+                        $currentCostumerData->getFirstname() . " " . 
+                        $currentCostumerData->getMiddlename() . " " . 
+                        $currentCostumerData->getLastname()
+                    ;
+                ?>  
+                <form id="commentForm" method = "POST">
+                    <div class="form-group">
+                        <label for="messageInput">(<?= $curCosFullname ?>) Your comment</label>
+                        <textarea name = "comment" id = "comment" class="form-control" rows="3" id="messageInput" placeholder="Your comment"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <span class="comment-notice"></span>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            <?php }else{ ?>
+                <h4>You need to loged in to write a comment</h4>
+            <?php } ?>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class = "col-sm-12">
+            <div class="comments"></div>
+        </div>
+    </div>
+</div>
+</div>
+<script type="text/javascript">
+require([
+    'jquery',
+    'jquery/ui'
+], function($){
+    var postId = -1;
+    $(document).ready( function() {
+        $('#commentForm').on("submit", function(e) {
+            var request;
+            event.preventDefault();
+            if (request) {
+                request.abort();
+            }
+
+            var comment = $('#comment').val();
+            $('.comment-notice').html("");
+            if(comment == "") {
+                $('#comment').addClass("border-danger");
+                $('.comment-notice').html("Your comment can not be empty!");
+                $('.comment-notice').addClass('error');
+            }else{
+                var $form = $(this);
+                var $inputs = $form.find("input, textarea, button, submit");
+                var serializedData = JSON.stringify(
+                    {
+                        'postId' : postId,
+                        'message':$('#comment').val()
+                    }
+                );
+                
+                $inputs.prop("disabled", true);
+                request = $.ajax({
+                    cache: false,
+                    type: "post",
+                    url: "<?= $block->getBaseUrl() ?>rest/V1/comment/addComment",
+                    dataType : "json",
+                    contentType: "application/json; charset=utf-8",
+                    data: serializedData
+                });
+                console.log(request);
+                request.done(function (response, textStatus, jqXHR){
+                    if(response) {
+                        $('.comment-notice').html("Successfull! You added a new comment.");
+                        $('.comment-notice').addClass('success');
+                        loadComments();
+                    }else{
+                        $('.comment-notice').html("Error! An error occured while adding your comment!");
+                        $('.comment-notice').addClass('error');
+                    }
+                });
+            }
+        });
+
+        loadComments();
+        
+
+    });
+
+    function createUserLogo(userName) {
+        var html = "";
+        html += "<div class = 'user-logo'>";
+        html += userName.charAt(0);
+        html += "</div>";
+        return html;
+    }
+
+    function loadComments() {
+        request = $.ajax({
+            cache: false,
+            url: "<?= $block->getBaseUrl() ?>rest/V1/post/getByUrl/<?= $block->getPostUrl() ?>",
+            type: "get",
+            async: false
+        });
+        request.done(function (response, textStatus, jqXHR){
+            if(response.length > 0) {
+                response = response[0];
+                postId = response['post_id'];
+                $('.post-title').html("<h2>" + response['title'] + "</h2>");
+                $('.post-image').attr("src", '<?= $block->getPostImageBasePath() ?>'+response['image']);
+                $('.post-image').removeClass('loading');
+                $('.post-image').attr('width', "100%");
+                $('.post-content').html(response['content']);
+                $('.post-updated-date').html(response['modified_date']);
+                var responseTags = response['tags'];
+                var tagArray = responseTags.split(',');
+                var tags = "";
+                $.each(tagArray,function(i, item) {
+                    tags += "<span class='tag label label-primary p-4 m-4 white'>" + item + "</span>";
+                });
+                $('.tags').html(tags);
+            }else{
+                $('.main-container').html('<h1><center>404</center></h1></br><h3><center>The Post Is Missing!</center></h3>');
+            }
+        });
+    
+        if(postId != -1) {
+            request = $.ajax({
+                cache: false,
+                url: "<?= $block->getBaseUrl() ?>rest/V1/comment/getById/" + postId,
+                type: "get"
+            });
+            request.done(function (response, textStatus, jqXHR){
+                if(response.length > 0) {
+                    var commentHtml="";
+                    $.each(response,function(i, item) {
+                        var userName = item['user_firstname'] + " "+ item['user_middlename'] + " " + item['user_lastname'];
+                        /*
+                        commentHtml+="<div class=\"col-sm-12 float-left item\">";
+                        commentHtml+="<div class=\"comment border border-gray\">";
+                        commentHtml+="<p>" + createUserLogo(userName) + " " + userName + "</p>";
+                        commentHtml+="<p> Email : " + item['user_email'] + "</p>";
+                        commentHtml+="<p>" + item['message'] +"</p>"; 
+                        commentHtml+="</div>";
+                        commentHtml+="</div>";
+                        */
+                        commentHtml+=" <div class=\"col-sm-12\">";
+                        commentHtml+=" <div class=\"col-sm-1\">";
+                        commentHtml+=" <div class=\"thumbnail\">";
+                        commentHtml+=" <img class=\"img-responsive user-photo\" src=\"https://ssl.gstatic.com/accounts/ui/avatar_2x.png\">";
+                        commentHtml+=" </div>";
+                        commentHtml+=" </div>";
+                        commentHtml+=" <div class=\"col-sm-11\">";
+                        commentHtml+=" <div class=\"panel panel-default\">";
+                        commentHtml+=" <div class=\"panel-heading\">";
+                        commentHtml+=" <strong>"+ userName +"</strong> <span class=\"text-muted\">";
+                        commentHtml+=  item['created_date'];
+                        commentHtml+="</span>";
+                        commentHtml+=" </div>";
+                        commentHtml+=" <div class=\"panel-body\">";
+                        commentHtml+=  item['message'];
+                        commentHtml+=" </div>";
+                        commentHtml+=" </div>";
+                        commentHtml+=" </div>";
+                        commentHtml+=" </div>";
+                    });
+                    $('.comments').html(commentHtml);
+                }else{
+                    $('.comments').html('<h2><center>There is no comment</center></h2></br><p><center>Be the first to comment...</center></p>');
+                }
+            });
+        }
+    }
+});
+</script>

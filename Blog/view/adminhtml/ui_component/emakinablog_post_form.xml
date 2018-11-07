@@ -21,7 +21,7 @@
     </argument>
     <dataSource name="emakinablog_post_grid_data_source">
         <argument name="dataProvider" xsi:type="configurableObject">
-            <argument name="class" xsi:type="string">Emakina\Blog\Model\DataProvider</argument>
+            <argument name="class" xsi:type="string">Emakina\Blog\Model\Post\DataProvider</argument>
             <argument name="name" xsi:type="string">emakinablog_post_grid_data_source</argument>
             <argument name="primaryFieldName" xsi:type="string">post_id</argument>
             <argument name="requestFieldName" xsi:type="string">post_id</argument>
@@ -106,13 +106,15 @@
             </argument>
         </field>
 
+
         <field name="tags">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
-                    <item name="label" xsi:type="string">Post Tags</item>
+                    <item name="label" xsi:type="string">Tags</item>
                     <item name="visible" xsi:type="boolean">true</item>
                     <item name="dataType" xsi:type="string">text</item>
                     <item name="formElement" xsi:type="string">input</item>
+                    
                 </item>
             </argument>
         </field>

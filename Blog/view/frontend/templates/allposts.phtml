@@ -1,0 +1,50 @@
+
+<h3>All Posts</h3>
+<div class="container">
+    <div class="row all-posts">
+        <center>
+            <img class="loading" src = "<?= $block->getPostImageUrl() ?>loading.gif" width="100px">
+        </center>
+    </div>
+    <div class = "row">
+        <ul class="pager">
+            <li><a href="#">Previous</a></li>
+            <li><a href="#">Next</a></li>
+        </ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+require([
+    'jquery',
+    'jquery/ui'
+], function($){
+    $(document).ready( function() {
+
+        request = $.ajax({
+            cache: false,
+            url: "<?= $block->getBaseUrl() ?>rest/V1/post/getAll",
+            type: "get"
+        });
+        request.done(function (response, textStatus, jqXHR){
+            console.log('1');
+            console.log(response);
+            var html="";
+            $.each(response,function(i, item) {
+                html+="<div class=\"col-md-4\">";
+                html+="<a href = \"<?= $block->getBaseUrl() ?>blog/index/post/url/"+ item['url'] +"\">";
+                html+="<div class=\"well\">";
+                html+="<img src = \"<?= $block->getPostImageUrl() ?>"+ item['image'] +"\" style=\"width:100%\">";
+                html+="<div class=\"caption\">";
+                html+="<h3><small>" + item['title'] + "</small></h3>";
+                html+="</div>";
+                html+="</div>";
+                html+="</a>"; 
+                html+="</div>";
+            });
+            $('.all-posts').html(html);
+            $('.loading').hide();
+        });
+    });
+});
+</script>

@@ -10,7 +10,7 @@
             </argument>
         </arguments>
     </virtualType>
-    <type name="Emakina\Blog\Model\DataProvider">
+    <type name="Emakina\Blog\Model\Post\DataProvider">
         <arguments>
             <argument name="pool" xsi:type="object">EmakinaBlogImageUploaderUiDataProviderImageFormModifierPool</argument>
         </arguments>

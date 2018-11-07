@@ -1,5 +1,5 @@
 <?php
-namespace Emakina\Blog\Model;
+namespace Emakina\Blog\Model\Post;
 
 use Emakina\Blog\Model\ResourceModel\Post\CollectionFactory;
 use Magento\Ui\DataProvider\AbstractDataProvider;

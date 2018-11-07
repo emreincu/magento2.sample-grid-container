@@ -8,6 +8,7 @@ use Magento\Framework\Model\AbstractModel;
 use Magento\Framework\Model\Context;
 use Magento\Framework\Model\ResourceModel\AbstractResource;
 use Magento\Framework\Registry;
+ 
 
 class Post extends AbstractModel implements PostInterface
 {
@@ -31,6 +32,7 @@ class Post extends AbstractModel implements PostInterface
      */
     protected $uploaderPool;
 
+
     /**
      * Sliders constructor.
      * @param Context $context
@@ -50,6 +52,7 @@ class Post extends AbstractModel implements PostInterface
     ) {
         parent::__construct($context, $registry, $resource, $resourceCollection, $data);
         $this->uploaderPool = $uploaderPool;
+        
     }
 
     /**
@@ -68,9 +71,10 @@ class Post extends AbstractModel implements PostInterface
      * @return array
      */
     public function getIdentities()
-    {
-        return [self::CACHE_TAG . '_' . $this->getId()];
+    { 
+        return [self::CACHE_TAG .'_'. $this->getPostId()];
     }
+
 
     /**
      * Get image
@@ -92,6 +96,7 @@ class Post extends AbstractModel implements PostInterface
     {
         return $this->setData(PostInterface::IMAGE, $image);
     }
+    
 
     /**
      * Get title
@@ -220,45 +225,45 @@ class Post extends AbstractModel implements PostInterface
     }
 
     /**
-     * Get created_at
+     * Get created_date
      *
      * @return Date
      */
-    public function getCreatedAt()
+    public function getCreatedDate()
     {
-        return $this->getData(PostInterface::CREATED_AT);
+        return $this->getData(PostInterface::CREATED_DATE);
     }
 
     /**
-     * Set created_at
+     * Set created_date
      *
      * @param $createdAt
      * @return $this
      */
-    public function setCreatedAt($createdAt)
+    public function setCreatedDate($createdDate)
     {
-        return $this->setData(PostInterface::CREATED_AT, $createdAt);
+        return $this->setData(PostInterface::CREATED_DATE, $createdDate);
     }
 
     /**
-     * Get modified_at
+     * Get modified_date
      *
      * @return Date
      */
-    public function getModifiedAt()
+    public function getModifiedDate()
     {
-        return $this->getData(PostInterface::MODIFIED_AT);
+        return $this->getData(PostInterface::MODIFIED_DATE);
     }
 
     /**
-     * Set modified_at
+     * Set modified_date
      *
-     * @param $modifiedAt
+     * @param $modifiedDate
      * @return $this
      */
-    public function setModifiedAt($modifiedAt)
+    public function setModifiedDate($modifiedDate)
     {
-        return $this->setData(PostInterface::MODIFIED_AT, $modifiedAt);
+        return $this->setData(PostInterface::MODIFIED_DATE, $modifiedDate);
     }
 
     /**

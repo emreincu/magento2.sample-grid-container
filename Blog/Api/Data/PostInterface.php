@@ -1,9 +1,6 @@
 <?php
 namespace Emakina\Blog\Api\Data;
 
-/**
- * @api
- */
 interface PostInterface
 {
     const POST_ID = 'post_id'; //PK
@@ -13,17 +10,11 @@ interface PostInterface
     const URL = 'url';
     const IS_ACTIVE = 'is_active';
     const VIEW_COUNT = 'view_count';
-    const TAGS = 'post_tags';
-    const CREATED_AT = 'created_at';
-    const MODIFIED_AT = 'modified_at';
+    const TAGS = 'tags';
+    const CREATED_DATE = 'created_date';
+    const MODIFIED_DATE = 'modified_date';
 
     #region Getters
-    /**
-     * Get ID
-     *
-     * @return int|null
-     */
-    public function getId();
 
     /**
      * Get image
@@ -33,71 +24,64 @@ interface PostInterface
     public function getImage();
 
     /**
-     * Get ID
+     * Get title
      *
-     * @return int|null
+     * @return string
      */
     public function getTitle();
 
     /**
-     * Get image
+     * Get content
      *
      * @return string
      */
     public function getContent();
 
     /**
-     * Get ID
+     * Get url
      *
-     * @return int|null
+     * @return string
      */
     public function getUrl();
 
     /**
-     * Get image
+     * Get is_active
      *
-     * @return string
+     * @return boolean
      */
     public function getIsActive();
 
     /**
-     * Get ID
+     * Get viewCount
      *
-     * @return int|null
+     * @return int
      */
     public function getViewCount();
 
     /**
-     * Get image
+     * Get tags
      *
      * @return string
      */
     public function getTags();
 
     /**
-     * Get ID
+     * Get createdAt
      *
-     * @return int|null
+     * @return date
      */
-    public function getCreatedAt();
+    public function getCreatedDate();
 
     /**
-     * Get image
+     * Get modifiedAt
      *
-     * @return string
+     * @return date
      */
-    public function getModifiedAt();
+    public function getModifiedDate();
 
     #endregion
 
     #region Setters
-    /**
-     * Set ID
-     *
-     * @param $id
-     * @return PostInterface
-     */
-    public function setId($id);
 
     /**
      * Set image
@@ -108,68 +92,68 @@ interface PostInterface
     public function setImage($image);
 
     /**
-     * Set ID
+     * Set title
      *
-     * @param $id
+     * @param $title
      * @return PostInterface
      */
     public function setTitle($title);
 
     /**
-     * Set image
+     * Set content
      *
-     * @param $image
+     * @param $content
      * @return PostInterface
      */
     public function setContent($content);
 
     /**
-     * Set ID
+     * Set url
      *
-     * @param $id
+     * @param $url
      * @return PostInterface
      */
     public function setUrl($url);
 
     /**
-     * Set ID
+     * Set isActive
      *
-     * @param $id
+     * @param $isActive
      * @return PostInterface
      */
     public function setIsActive($isActive);
 
     /**
-     * Set image
+     * Set viewCount
      *
-     * @param $image
+     * @param $viewCount
      * @return PostInterface
      */
     public function setViewCount($viewCount);
 
     /**
-     * Set ID
+     * Set tags
      *
-     * @param $id
+     * @param $tags
      * @return PostInterface
      */
     public function setTags($tags);
 
     /**
-     * Set image
+     * Set createdAt
      *
-     * @param $image
+     * @param $createdDate
      * @return PostInterface
      */
-    public function setCreatedAt($createdAt);
+    public function setCreatedDate($createdDate);
 
     /**
-     * Set image
+     * Set updatedAt
      *
-     * @param $image
+     * @param $updatedDate
      * @return PostInterface
      */
-    public function setModifiedAt($updatedAt);
+    public function setModifiedDate($updatedDate);
 
     #endregion
 }

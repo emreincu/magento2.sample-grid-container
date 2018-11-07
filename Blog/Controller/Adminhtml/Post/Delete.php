@@ -23,7 +23,7 @@ class Delete extends Post
             } catch (NoSuchEntityException $e) {
                 $this->messageManager->addErrorMessage(__('The post no longer exists.'));
                 return $resultRedirect->setPath('emakinablog/post/index');
-            } catch (LocalizedException $e) {
+            } catch (LocalizedException $e) { 
                 $this->messageManager->addErrorMessage($e->getMessage());
                 return $resultRedirect->setPath('emakinablog/post/index', ['post_id' => $postId]);
             } catch (\Exception $e) {

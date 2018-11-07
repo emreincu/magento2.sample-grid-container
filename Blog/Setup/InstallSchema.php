@@ -125,102 +125,101 @@ class InstallSchema implements \Magento\Framework\Setup\InstallSchemaInterface
 			);
 		}
 
-
-		// if (!$installer->tableExists('emakina_blog_comments')) {
-		// 	$table = $installer->getConnection()->newTable(
-		// 		$installer->getTable('emakina_blog_comments')
-		// 	)->addColumn(
-		// 			'comment_id',
-		// 			\Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-		// 			null,
-		// 			[
-		// 				'identity' => true,
-		// 				'nullable' => false,
-		// 				'primary'  => true,
-		// 				'unsigned' => true,
-		// 			],
-		// 			'Comment ID'
-		// 		)
-		// 		->addColumn(
-		// 			'post_id',
-		// 			\Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-		// 			null,
-		// 			[
-		// 				'nullable' => false,
-		// 				'unsigned' => true,
-		// 			],
-		// 			'Post ID'
-		// 		)
-		// 		->addColumn(
-		// 			'user_id',
-		// 			\Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-		// 			null,
-		// 			[
-		// 				'nullable' => false
-		// 			],
-		// 			'User ID'
-		// 		)
-		// 		->addColumn(
-		// 			'comment_message',
-		// 			\Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
-		// 			\Magento\Framework\DB\Ddl\Table::MAX_TEXT_SIZE,
-		// 			[
-		// 				'nullable' => false
-		// 			],
-		// 			'Comment Message'
-		// 		)
-		// 		->addColumn(
-		// 			'comment_status',
-		// 			\Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
-		// 			null,
-		// 			[
-		// 				'nullable' => false,
-		// 				'default' => 1
-		// 			],
-		// 			'Comment View Count'
-		// 		)
-		// 		->addColumn(
-		// 			'comment_createdDate',
-		// 			\Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
-		// 			null,
-		// 			[
-		// 				'nullable' => false,
-		// 				'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT
-		// 			],
-		// 			'Comment Created Date&Time'
-		// 		)->addColumn(
-		// 			'comment_updatedDate',
-		// 			\Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
-		// 			null,
-		// 			[
-		// 				'nullable' => false,
-		// 				'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT_UPDATE
-		// 			],
-		// 			'Comment Updated Date&Time'
-		// 		)->addIndex(
-		// 			$setup->getIdxName(
-		// 				$installer->getTable('emakina_blog_comments'),
-		// 				['comment_id'],
-		// 				\Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE
-		// 			),
-		// 			['comment_id'],
-		// 			\Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE
-		// 		)->addForeignKey( // Add foreign key for table entity
-		// 			$installer->getFkName(
-		// 				'emakina_blog_comments', // New table
-		// 				'post_id', // Column in New Table
-		// 				'emakina_blog_posts', // Reference Table
-		// 				'comment_id' // Column in Reference table
-		// 			),
-		// 			'post_id', // New table column
-		// 			$installer->getTable('emakina_blog_posts'), // Reference Table
-		// 			'post_id', // Reference Table Column
-		// 			// When the parent is deleted, delete the row with foreign key
-		// 			\Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
-		// 		)->setComment('Comment Table');
+		if (!$installer->tableExists('emakina_blog_comments')) {
+			$table = $installer->getConnection()->newTable(
+				$installer->getTable('emakina_blog_comments')
+			)->addColumn(
+					'comment_id',
+					\Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+					null,
+					[
+						'identity' => true,
+						'nullable' => false,
+						'primary'  => true,
+						'unsigned' => true,
+					],
+					'Comment ID'
+				)
+				->addColumn(
+					'post_id',
+					\Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+					null,
+					[
+						'nullable' => false,
+						'unsigned' => true,
+					],
+					'Post ID'
+				)
+				->addColumn(
+					'user_id',
+					\Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+					null,
+					[
+						'nullable' => false
+					],
+					'User ID'
+				)
+				->addColumn(
+					'message',
+					\Magento\Framework\DB\Ddl\Table::TYPE_TEXT,
+					\Magento\Framework\DB\Ddl\Table::MAX_TEXT_SIZE,
+					[
+						'nullable' => false
+					],
+					'Comment Message'
+				)
+				->addColumn(
+					'status',
+					\Magento\Framework\DB\Ddl\Table::TYPE_INTEGER,
+					null,
+					[
+						'nullable' => false,
+						'default' => 1
+					],
+					'Comment View Count'
+				)
+				->addColumn(
+					'created_date',
+					\Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+					null,
+					[
+						'nullable' => false,
+						'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT
+					],
+					'Comment Created Date&Time'
+				)->addColumn(
+					'modified_date',
+					\Magento\Framework\DB\Ddl\Table::TYPE_TIMESTAMP,
+					null,
+					[
+						'nullable' => false,
+						'default' => \Magento\Framework\DB\Ddl\Table::TIMESTAMP_INIT_UPDATE
+					],
+					'Comment Updated Date&Time'
+				)->addIndex(
+					$setup->getIdxName(
+						$installer->getTable('emakina_blog_comments'),
+						['comment_id'],
+						\Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE
+					),
+					['comment_id'],
+					\Magento\Framework\DB\Adapter\AdapterInterface::INDEX_TYPE_UNIQUE
+				)->addForeignKey( // Add foreign key for table entity
+					$installer->getFkName(
+						'emakina_blog_comments', // New table
+						'post_id', // Column in New Table
+						'emakina_blog_posts', // Reference Table
+						'comment_id' // Column in Reference table
+					),
+					'post_id', // New table column
+					$installer->getTable('emakina_blog_posts'), // Reference Table
+					'post_id', // Reference Table Column
+					// When the parent is deleted, delete the row with foreign key
+					\Magento\Framework\DB\Ddl\Table::ACTION_CASCADE
+				)->setComment('Comment Table');
 				
-		// 	$installer->getConnection()->createTable($table);
-		// }
+			$installer->getConnection()->createTable($table);
+		}
 
 		$installer->endSetup();
 	}

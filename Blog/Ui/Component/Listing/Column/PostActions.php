@@ -6,7 +6,7 @@ use Magento\Framework\View\Element\UiComponentFactory;
 use Magento\Framework\View\Element\UiComponent\ContextInterface;
 use Magento\Ui\Component\Listing\Columns\Column;
 
-class ImageActions extends Column
+class PostActions extends Column
 {
     const URL_PATH_EDIT = 'emakinablog/post/edit';
     const URL_PATH_DELETE = 'emakinablog/post/delete';

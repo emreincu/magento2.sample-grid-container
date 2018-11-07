@@ -19,12 +19,33 @@ interface PostRepositoryInterface
 
     /**
      * Retrieve Post.
-     *
+     * @api
      * @param int $postId
-     * @return PostInterface
+     * @return \Emakina\Blog\Api\Data\PostInterface
      * @throws \Magento\Framework\Exception\LocalizedException
+     * 
      */
     public function getById($postId);
+
+
+    /**
+     * Retrieve Post.
+     * @api
+     * @param string $postUrl
+     * @return \Emakina\Blog\Api\Data\PostInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * 
+     */
+    public function getByUrl($postUrl);
+    
+    /**
+     * Retrieve All Posts.
+     * @api
+     * @return \Emakina\Blog\Api\Data\PostInterface
+     * @throws \Magento\Framework\Exception\LocalizedException
+     * 
+     */
+    public function getAll();
 
     /**
      * Delete image.

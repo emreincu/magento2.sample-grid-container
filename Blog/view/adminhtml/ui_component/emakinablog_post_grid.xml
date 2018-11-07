@@ -111,6 +111,17 @@
                 </item>
             </argument>
         </column>
+        <actionsColumn name="comments" class="Emakina\Blog\Ui\Component\Listing\Column\PostComment">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="indexField" xsi:type="string">post_id</item>
+                    <item name="urlEntityParamName" xsi:type="string">post_id</item>
+                    <item name="resizeEnabled" xsi:type="boolean">false</item>
+                    <item name="resizeDefaultWidth" xsi:type="string">107</item>
+                    <item name="label" xsi:type="string" translate="true">Comments</item>
+                </item>
+            </argument>
+        </actionsColumn>
         <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
@@ -145,7 +156,7 @@
                 </item>
             </argument>
         </column> 
-        <actionsColumn name="actions" class="Emakina\Blog\Ui\Component\Listing\Column\ImageActions">
+        <actionsColumn name="actions" class="Emakina\Blog\Ui\Component\Listing\Column\PostActions">
             <argument name="data" xsi:type="array">
                 <item name="config" xsi:type="array">
                     <item name="indexField" xsi:type="string">post_id</item>
