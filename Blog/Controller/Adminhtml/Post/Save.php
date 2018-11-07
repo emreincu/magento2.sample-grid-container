@@ -103,7 +103,7 @@ class Save extends Post
 
             try {
                 if (!array_key_exists('image', $data)) {
-                    $data['image'] = null;
+                    $data['image'] = "../default.jpg";
                 } else {
                     
                     $image = $this->getUploader('image')->uploadFileAndGetName('image', $data);
