@@ -81,7 +81,7 @@ class Save extends Post
     public function execute()
     {
         $data = $this->getRequest()->getPostValue();
-
+    
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($data) {
             
@@ -105,8 +105,10 @@ class Save extends Post
                 if (!array_key_exists('image', $data)) {
                     $data['image'] = null;
                 } else {
+                    
                     $image = $this->getUploader('image')->uploadFileAndGetName('image', $data);
-                    $data['image'] = empty($image) ? $model['image'] : $image;
+                    
+                    $data['image'] = ($image === "image") ? $model->getImage() : $image;
                 }
                 $this->dataObjectHelper->populateWithArray($model, $data, PostInterface::class);
                 $this->postRepository->save($model);
