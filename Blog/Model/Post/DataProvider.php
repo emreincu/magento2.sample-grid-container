@@ -18,7 +18,6 @@ class DataProvider extends AbstractDataProvider
      * @param string $primaryFieldName
      * @param string $requestFieldName
      * @param CollectionFactory $postCollectionFactory
-     * @param PoolInterface $pool
      * @param array $meta
      * @param array $data
      */
@@ -27,6 +26,7 @@ class DataProvider extends AbstractDataProvider
         $primaryFieldName,
         $requestFieldName,
         CollectionFactory $postCollectionFactory,
+
         PoolInterface $pool,
         array $meta = [],
         array $data = []

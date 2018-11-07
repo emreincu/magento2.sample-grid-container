@@ -1,6 +1,5 @@
 <?php
 namespace Emakina\Blog\Controller\Adminhtml\Post;
-
 use Emakina\Blog\Api\PostRepositoryInterface;
 use Emakina\Blog\Controller\Adminhtml\Post;
 use Emakina\Blog\Model\ResourceModel\Post\CollectionFactory;

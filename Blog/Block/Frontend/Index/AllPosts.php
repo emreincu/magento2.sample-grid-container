@@ -1,6 +1,5 @@
 <?php
 namespace Emakina\Blog\Block\Frontend\Index;
-
 use \Emakina\Blog\Model\Uploader;
 class AllPosts extends \Magento\Framework\View\Element\Template
 {
@@ -13,6 +12,7 @@ class AllPosts extends \Magento\Framework\View\Element\Template
 		$this->_storeManager = $_storeManager;
 		parent::__construct($context);
 	}
+	
 	public function getPostImageUrl() {
 		$baseUrl = $this->_storeManager->getStore()->getBaseUrl(\Magento\Framework\UrlInterface::URL_TYPE_MEDIA);
 		$postImageUrl = $baseUrl . Uploader::IMAGE_PATH;

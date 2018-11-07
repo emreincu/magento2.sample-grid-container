@@ -20,7 +20,6 @@ require([
     'jquery/ui'
 ], function($){
     $(document).ready( function() {
-
         request = $.ajax({
             cache: false,
             url: "<?= $block->getBaseUrl() ?>rest/V1/post/getAll",
