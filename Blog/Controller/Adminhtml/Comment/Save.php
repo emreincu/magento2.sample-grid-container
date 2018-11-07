@@ -77,16 +77,18 @@ class Save extends Comment
     {
 
         $data = $this->getRequest()->getPostValue()['blog'];
-
+        
         $resultRedirect = $this->resultRedirectFactory->create();
         if ($data) {
             $commentData = $data['comment'];
             $customerData = $data['customer'];
             try{
                 $newData = [
-                    'id_field_name' => $commentData['id_field_name'],
+                    'id_field_name' => 'comment_id',
                     'comment_id' => $commentData['comment_id'],
                     'post_id' => $commentData['post_id'],
+                    'user_id' => $customerData['id'],
+                    'message' => $commentData['message'],
                     'status' => $commentData['status'],
                     'created_date' => $commentData['created_date'],
                     'modified_date' => $commentData['modified_date']
@@ -107,12 +109,5 @@ class Save extends Comment
                 return $resultRedirect->setPath('emakinablog/post/index/');
             }
         }
-
-       
-        /*
-
-        $data = $this->getRequest()->getPostValue();
-        var_dump($data);exit;
-        */
     }
 }
